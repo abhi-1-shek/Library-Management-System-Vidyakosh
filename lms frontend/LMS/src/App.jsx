@@ -77,14 +77,16 @@ const App = () => {
       publishYear: book.publishYear || ''
     });
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    titleInputRef.current?.focus();
+    setTimeout(() => {
+      titleInputRef.current?.focus();
+    }, 100);
   };
 
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to remove this volume?")) {
       try {
         await BookService.deleteBook(id);
-        fetchBooks();
+        await fetchBooks();
       } catch (err) {
         alert("Delete failed.");
       }
@@ -103,7 +105,7 @@ const App = () => {
       </header>
 
       {/* --- FORM SECTION --- */}
-      <section className="form-section card">
+      <section className="form-section">
         <h2 className="section-title">
           {editingId ? '✍️ Update Record' : '➕ Add New Entry'}
         </h2>
@@ -112,6 +114,7 @@ const App = () => {
           <div className="input-grid">
             <input 
               ref={titleInputRef}
+              type="text"
               name="title" 
               value={formData.title} 
               onChange={handleChange} 
@@ -119,6 +122,7 @@ const App = () => {
               required 
             />
             <input 
+              type="text"
               name="author" 
               value={formData.author} 
               onChange={handleChange} 
@@ -126,14 +130,15 @@ const App = () => {
               required 
             />
             <input 
+              type="text"
               name="isbn" 
               value={formData.isbn} 
               onChange={handleChange} 
               placeholder="ISBN Number" 
             />
             <input 
+              type="number"
               name="publishYear" 
-              type="number" 
               value={formData.publishYear} 
               onChange={handleChange} 
               placeholder="Publication Year" 
@@ -160,12 +165,14 @@ const App = () => {
           <input
             type="text"
             className="search-input"
-            placeholder="Search archives..."
+            placeholder="Search archives by title, author, or ISBN..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
           {searchTerm && (
-            <button className="clear-search" onClick={() => setSearchTerm('')}>×</button>
+            <button className="clear-search" onClick={() => setSearchTerm('')}>
+              ×
+            </button>
           )}
         </div>
         <p className="results-count">
@@ -174,7 +181,7 @@ const App = () => {
       </div>
 
       {/* --- DISPLAY SECTION --- */}
-      <section className="table-section card">
+      <section className="table-section">
         {loading ? (
           <div className="loading-state">
             <div className="spinner"></div>
@@ -194,14 +201,18 @@ const App = () => {
               </thead>
               <tbody>
                 {processedBooks.map((book) => (
-                  <tr key={book.id} className="book-row">
-                    <td className="bold">{book.title}</td>
-                    <td>{book.author}</td>
+                  <tr key={book.id}>
+                    <td className="book-title">{book.title}</td>
+                    <td className="book-author">{book.author}</td>
                     <td className="isbn-text">{book.isbn || '—'}</td>
-                    <td>{book.publishYear || '—'}</td>
+                    <td className="year-badge">{book.publishYear || '—'}</td>
                     <td className="actions-cell">
-                      <button onClick={() => handleEdit(book)} className="btn-edit">Edit</button>
-                      <button onClick={() => handleDelete(book.id)} className="btn-delete">Delete</button>
+                      <button onClick={() => handleEdit(book)} className="btn-edit">
+                        Edit
+                      </button>
+                      <button onClick={() => handleDelete(book.id)} className="btn-delete">
+                        Delete
+                      </button>
                     </td>
                   </tr>
                 ))}
@@ -221,7 +232,7 @@ const App = () => {
       </section>
 
       <footer className="app-footer">
-        <p>© {new Date().getFullYear()} All Rights Reserved to Vidyakosh</p>
+        <p>© {new Date().getFullYear()} Vidyakosh - All Rights Reserved</p>
       </footer>
     </div>
   );
