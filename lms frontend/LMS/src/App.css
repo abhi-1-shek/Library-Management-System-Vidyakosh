@@ -1,15 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
 :root {
-  --bg-deep: #0a0b10;
-  --glass-bg: rgba(20, 21, 33, 0.7);
-  --glass-border: rgba(255, 255, 255, 0.08);
-  --accent-primary: #00d2ff;
-  --primary-gradient: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%);
-  --text-primary: #ffffff;
-  --text-secondary: #a0aec0;
-  --danger: #ff4b5c;
-  --safe: #00e676;
+  /* Light Theme Variables */
+  --bg-deep: #f4f7fb;
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(0, 0, 0, 0.08);
+  --accent-primary: #2c7da0;
+  --primary-gradient: linear-gradient(135deg, #2c7da0 0%, #1f5068 100%);
+  --text-primary: #1e293b;
+  --text-secondary: #475569;
+  --danger: #e53e3e;
+  --safe: #2c7a4b;
+  --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
+  --hover-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
 }
 
 * {
@@ -25,9 +27,9 @@ body {
   min-height: 100vh;
   padding: 40px 20px;
   background-image: 
-    radial-gradient(at 0% 0%, rgba(58, 123, 213, 0.15) 0px, transparent 50%),
-    radial-gradient(at 100% 0%, rgba(0, 210, 255, 0.1) 0px, transparent 50%),
-    radial-gradient(at 50% 100%, rgba(102, 51, 153, 0.1) 0px, transparent 50%);
+    radial-gradient(at 0% 0%, rgba(44, 125, 160, 0.05) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(31, 80, 104, 0.04) 0px, transparent 50%),
+    radial-gradient(at 50% 100%, rgba(44, 125, 160, 0.03) 0px, transparent 50%);
   background-attachment: fixed;
 }
 
@@ -51,6 +53,19 @@ h1 {
   padding: 10px 0;
 }
 
+/* FIX: Section title styling - makes "Add New Entry" visible */
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: var(--text-primary);
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
 .form-section {
   background: var(--glass-bg);
   backdrop-filter: blur(24px);
@@ -58,7 +73,7 @@ h1 {
   border-radius: 24px;
   border: 1px solid var(--glass-border);
   margin-bottom: 40px;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+  box-shadow: var(--card-shadow);
 }
 
 .input-grid {
@@ -69,9 +84,9 @@ h1 {
 }
 
 input {
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(255, 255, 255, 0.9);
   border: 1px solid var(--glass-border);
-  color: white;
+  color: var(--text-primary);
   padding: 14px 18px;
   border-radius: 12px;
   font-size: 0.95rem;
@@ -81,8 +96,8 @@ input {
 input:focus {
   outline: none;
   border-color: var(--accent-primary);
-  background: rgba(0, 0, 0, 0.6);
-  box-shadow: 0 0 0 4px rgba(0, 210, 255, 0.1);
+  background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(44, 125, 160, 0.1);
 }
 
 .form-actions {
@@ -105,6 +120,7 @@ input:focus {
   position: absolute;
   left: 20px;
   opacity: 0.5;
+  color: var(--text-secondary);
 }
 
 .search-input {
@@ -113,6 +129,9 @@ input:focus {
   border-radius: 18px;
   height: 60px;
   font-size: 1.1rem;
+  background: #ffffff;
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--card-shadow);
 }
 
 .results-count {
@@ -153,14 +172,15 @@ input:focus {
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   position: relative;
   min-height: 280px;
-  overflow: hidden; 
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
 }
 
 .book-table tr:hover {
   transform: translateY(-10px);
   border-color: var(--accent-primary);
-  box-shadow: 0 25px 50px -12px rgba(0, 210, 255, 0.25);
-  background: rgba(30, 31, 45, 0.8);
+  box-shadow: var(--hover-shadow);
+  background: #ffffff;
 }
 
 .book-table td {
@@ -180,9 +200,7 @@ input:focus {
   word-wrap: break-word;
   white-space: normal;
   overflow-wrap: break-word;
-  
-  /* ADDED FIXES BELOW */
-  padding: 25px 45px 0 45px; /* Creates space for the badge and balances sides */
+  padding: 25px 45px 0 45px;
   width: 100%;
 }
 
@@ -194,7 +212,7 @@ input:focus {
 }
 
 .book-table td:nth-child(3) {
-  background: rgba(0, 210, 255, 0.05);
+  background: rgba(44, 125, 160, 0.08);
   padding: 8px 16px;
   border-radius: 12px;
   font-family: 'JetBrains Mono', monospace;
@@ -202,7 +220,7 @@ input:focus {
   color: var(--accent-primary);
   width: fit-content;
   margin: 0 auto;
-  border: 1px solid rgba(0, 210, 255, 0.2);
+  border: 1px solid rgba(44, 125, 160, 0.2);
 }
 
 /* Year Badge - Adjusted positioning */
@@ -216,7 +234,7 @@ input:focus {
   border-radius: 10px;
   font-weight: 800;
   font-size: 0.75rem;
-  box-shadow: 0 4px 10px rgba(0, 210, 255, 0.3);
+  box-shadow: 0 4px 10px rgba(44, 125, 160, 0.3);
   z-index: 10;
 }
 
@@ -241,31 +259,103 @@ button {
 .btn-primary {
   background: var(--primary-gradient);
   color: white;
-  box-shadow: 0 10px 20px rgba(0, 210, 255, 0.2);
+  box-shadow: 0 10px 20px rgba(44, 125, 160, 0.2);
+}
+
+.btn-secondary {
+  background: rgba(0, 0, 0, 0.05);
+  color: var(--text-primary);
+  border: 1px solid var(--glass-border);
+}
+
+.btn-secondary:hover {
+  background: rgba(0, 0, 0, 0.1);
 }
 
 .btn-edit {
-  background: rgba(0, 230, 118, 0.08);
+  background: rgba(44, 122, 75, 0.08);
   color: var(--safe);
-  border: 1px solid rgba(0, 230, 118, 0.15);
+  border: 1px solid rgba(44, 122, 75, 0.15);
   flex: 1;
 }
 
 .btn-delete {
-  background: rgba(255, 75, 92, 0.08);
+  background: rgba(229, 62, 62, 0.08);
   color: var(--danger);
-  border: 1px solid rgba(255, 75, 92, 0.15);
+  border: 1px solid rgba(229, 62, 62, 0.15);
   flex: 1;
 }
 
 .btn-edit:hover {
   background: var(--safe);
-  color: #000;
+  color: #fff;
 }
 
 .btn-delete:hover {
   background: var(--danger);
   color: #fff;
+}
+
+.clear-search {
+  position: absolute;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.1);
+  color: var(--text-primary);
+  padding: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.clear-search:hover {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.btn-link {
+  background: transparent;
+  color: var(--accent-primary);
+  text-decoration: underline;
+  padding: 8px 16px;
+}
+
+.btn-link:hover {
+  background: transparent;
+  opacity: 0.8;
+}
+
+.empty-state, .loading-state {
+  text-align: center;
+  padding: 60px 20px;
+  background: var(--glass-bg);
+  border-radius: 24px;
+  border: 1px solid var(--glass-border);
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(44, 125, 160, 0.2);
+  border-top-color: var(--accent-primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto 16px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.app-footer {
+  text-align: center;
+  margin-top: 60px;
+  padding: 20px;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  border-top: 1px solid var(--glass-border);
 }
 
 @media (max-width: 480px) {
